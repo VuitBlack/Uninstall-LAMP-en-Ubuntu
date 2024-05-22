@@ -1,0 +1,29 @@
+# Completely Remove Apache Ubuntu
+service apache2 stop
+apt purge apache2 apache2-utils apache2.2-bin 
+apt remove apache2.*
+apt autoremove
+whereis apache2
+rm -rf /etc/apache2
+
+# This will Completely remove PHP version Ubuntu. Type your php version before run below command. I am using php 8.0.x change yours...
+
+php --version
+apt purge `dpkg -l | grep php8.0| awk '{print $2}' |tr "\n" " "`
+apt purge php8.*
+apt autoremove --purge
+whereis php
+rm -rf /etc/php
+apt update -y
+apt upgrade -y
+php --version
+
+# This will completely remove MYSql
+service mysql stop
+apt remove --purge *mysql\*
+apt remove --purge mysql-server mysql-client mysql-common -y
+rm -rf /etc/mysql
+apt autoremove
+apt autoclean
+
+reboot
